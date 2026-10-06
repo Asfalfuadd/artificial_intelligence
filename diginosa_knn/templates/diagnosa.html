@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Diagnosa - LapFix Diagnostic</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary": "#003d9b",
+                "primary-container": "#0052cc",
+                "on-primary": "#ffffff",
+                "secondary": "#505f78",
+                "surface": "#f9f9ff",
+                "surface-container": "#e8edff",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-high": "#e0e8ff",
+                "inverse-surface": "#1d3052",
+                "inverse-on-surface": "#edf0ff",
+                "on-background": "#041b3c",
+                "background": "#f9f9ff",
+                "outline-variant": "#c3c6d6"
+            },
+            "spacing": {
+                "stack-md": "16px",
+                "margin-mobile": "16px",
+                "stack-lg": "32px",
+                "margin-desktop": "32px",
+                "container-max-width": "1280px",
+                "gutter": "24px",
+                "stack-sm": "8px"
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-sans">
+
+<nav class="bg-surface border-b border-outline-variant shadow-sm sticky top-0 z-50">
+    <div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max-width mx-auto">
+        <div class="text-xl font-bold text-primary">LapFix Diagnostic</div>
+        <div class="hidden md:flex gap-gutter items-center text-sm">
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/">Home</a>
+            <a class="text-primary font-bold border-b-2 border-primary pb-1" href="/diagnosa">Diagnosa</a>
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/layanan">Layanan</a>
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/kontak">Kontak</a>
+        </div>
+        <a href="/diagnosa" class="bg-primary text-on-primary px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:bg-primary-container">Reset</a>
+    </div>
+</nav>
+
+<main class="min-h-[calc(100vh-64px-180px)] py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <div class="lg:col-span-7 bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold text-slate-900">Input Gejala Laptop</h2>
+                <p class="text-xs text-secondary mt-1">Silakan centang indikator gejala klinis yang terjadi pada perangkat Anda saat ini.</p>
+            </div>
+
+            <form method="POST" action="/diagnosa" class="space-y-6">
+                <div class="bg-surface-container p-4 rounded-xl border border-outline-variant/60">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-primary mb-2">Nilai Parameter Tetangga (K-Value): {{ k_value }}</label>
+                    <input type="range" name="k_value" min="1" max="15" step="2" value="{{ k_value }}" class="w-full accent-primary" onchange="this.form.submit()">
+                    <span class="text-[10px] text-secondary block mt-1">*Mengubah slider akan otomatis melatih ulang model kNN secara real-time.</span>
+                </div>
+
+                <div class="space-y-2 max-h-[350px] overflow-y-auto pr-2">
+                    {% if daftar_gejala %}
+                        {% for gejala in daftar_gejala %}
+                        <label class="flex items-start gap-3 p-3 bg-surface border border-outline-variant rounded-xl cursor-pointer hover:border-primary transition-colors">
+                            <input type="checkbox" name="gejala" value="{{ gejala }}" {% if gejala in gejala_dipilih %}checked{% endif %} class="rounded border-outline-variant text-primary focus:ring-primary mt-0.5">
+                            <span class="text-xs font-medium text-slate-800">
+                                {{ kamus_gejala.get(gejala, gejala) }}
+                            </span>
+                        </label>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-xs text-secondary italic">Tidak ada data gejala yang ditemukan di database `tbl_dataset_ml`.</p>
+                    {% endif %}
+                </div>
+
+                <button type="submit" name="diagnosa" class="w-full bg-primary text-on-primary font-bold py-3 rounded-lg text-xs hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">analytics</span> Mulai Analisis Kerusakan (kNN Engine)
+                </button>
+            </form>
+        </div>
+
+        <div class="lg:col-span-5 space-y-6">
+            <div class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm">
+                <h3 class="text-sm font-bold border-b border-outline-variant pb-3 mb-4 text-slate-900 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">assignment_turned_in</span> Hasil Rekomendasi Sistem
+                </h3>
+                
+                {% if hasil %}
+                    <div class="space-y-4">
+                        <div class="p-4 bg-primary/5 border border-primary/20 rounded-xl">
+                            <span class="text-[10px] font-bold text-primary uppercase tracking-wider block">Prediksi Kerusakan:</span>
+                            <h4 class="text-base font-bold text-slate-900 mt-1">{{ hasil.nama }}</h4>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Uraian Teknis:</span>
+                            <p class="text-xs text-secondary leading-relaxed mt-1">{{ hasil.deskripsi }}</p>
+                        </div>
+                        <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
+                            <span class="text-[10px] font-bold text-yellow-800 uppercase tracking-wider block">Langkah Solusi Perbaikan:</span>
+                            <ul class="list-disc list-inside text-xs text-yellow-900 mt-1 space-y-1">
+                                {% for poin in hasil.solusi %}
+                                    <li>{{ poin }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-center py-12 text-secondary">
+                        <span class="material-symbols-outlined text-4xl opacity-40 mb-2">wysiwyg</span>
+                        <p class="text-xs">Silakan pilih gejala di sebelah kiri dan klik tombol analisis untuk melihat hasil penelusuran model.</p>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="bg-inverse-surface text-inverse-on-surface rounded-2xl p-6 shadow-md">
+                <h3 class="text-sm font-bold border-b border-white/20 pb-3 mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-xl">query_stats</span> Performa Model Akurasi (K={{ k_value }})
+                </h3>
+                <div class="grid grid-cols-3 gap-2 text-center">
+                    <div class="p-2 bg-white/5 rounded-lg border border-white/10">
+                        <div class="text-xl font-black text-white font-mono">{{ metrik.accuracy }}%</div>
+                        <div class="text-[9px] uppercase tracking-wider opacity-70 mt-0.5">Accuracy</div>
+                    </div>
+                    <div class="p-2 bg-white/5 rounded-lg border border-white/10">
+                        <div class="text-xl font-black text-white font-mono">{{ metrik.precision }}%</div>
+                        <div class="text-[9px] uppercase tracking-wider opacity-70 mt-0.5">Precision</div>
+                    </div>
+                    <div class="p-2 bg-white/5 rounded-lg border border-white/10">
+                        <div class="text-xl font-black text-white font-mono">{{ metrik.recall }}%</div>
+                        <div class="text-[9px] uppercase tracking-wider opacity-70 mt-0.5">Recall</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-inverse-surface text-inverse-on-surface mt-stack-lg">
+    <div class="px-margin-desktop py-6 text-center text-xs opacity-70 max-w-container-max-width mx-auto border-t border-white/10">
+        © 2026 LapFix Diagnostic - Sistem Pakar Klasifikasi K-Nearest Neighbors Berbasis Web.
+    </div>
+</footer>
+
+</body>
+</html>

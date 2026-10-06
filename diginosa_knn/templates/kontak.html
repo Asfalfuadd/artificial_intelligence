@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Kontak - LapFix Diagnostic</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary": "#003d9b",
+                "primary-container": "#0052cc",
+                "on-primary": "#ffffff",
+                "secondary": "#505f78",
+                "surface": "#f9f9ff",
+                "surface-container": "#e8edff",
+                "surface-container-lowest": "#ffffff",
+                "inverse-surface": "#1d3052",
+                "inverse-on-surface": "#edf0ff",
+                "on-background": "#041b3c",
+                "background": "#f9f9ff",
+                "outline-variant": "#c3c6d6"
+            },
+            "spacing": {
+                "stack-lg": "32px",
+                "margin-desktop": "32px",
+                "margin-mobile": "16px",
+                "container-max-width": "1280px",
+                "gutter": "24px"
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-sans">
+
+<nav class="bg-surface border-b border-outline-variant shadow-sm sticky top-0 z-50">
+    <div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max-width mx-auto">
+        <div class="text-xl font-bold text-primary">LapFix Diagnostic</div>
+        <div class="hidden md:flex gap-gutter items-center text-sm">
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/">Home</a>
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/diagnosa">Diagnosa</a>
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/layanan">Layanan</a>
+            <a class="text-primary font-bold border-b-2 border-primary pb-1" href="/kontak">Kontak</a>
+        </div>
+        <a href="/diagnosa" class="bg-primary text-on-primary px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:bg-primary-container">Mulai Diagnosa</a>
+    </div>
+</nav>
+
+<main class="min-h-[calc(100vh-64px-180px)] py-12 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+        <h1 class="text-3xl font-bold mb-3 text-slate-900">Hubungi Team Teknisi Kami</h1>
+        <p class="text-secondary text-sm">Punya pertanyaan khusus atau ingin berkonsultasi mengenai kerja sama korporasi perangkat kantor?</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
+        <div class="lg:col-span-5 bg-surface-container border border-outline-variant rounded-2xl p-6 md:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-primary">Informasi Pusat</h3>
+            <p class="text-xs text-secondary leading-relaxed">
+                Anda juga bisa langsung membawa perangkat Anda ke area drop-point fisik workshop tanpa memerlukan janji temu terlebih dahulu.
+            </p>
+            
+            <div class="space-y-4 pt-2 text-sm">
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary">pin_drop</span>
+                    <div>
+                        <strong class="block text-slate-900">Lokasi Workshop:</strong>
+                        <span class="text-xs text-secondary">Jl.Raya Praya-Mantang No. 01, Blok LC, Praya, Lombok Tengah</span>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary">call</span>
+                    <div>
+                        <strong class="block text-slate-900">Hotline Telepon:</strong>
+                        <span class="text-xs text-secondary font-mono">(+62)877-5334-1606</span>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary">mail</span>
+                    <div>
+                        <strong class="block text-slate-900">Email Dukungan:</strong>
+                        <span class="text-xs text-secondary font-mono">support@Rishtec.co.id</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 md:p-8 shadow-sm">
+            <h3 class="text-lg font-bold text-slate-900 mb-6">Kirim Pesan Tiket</h3>
+            <form action="#" method="POST" class="space-y-4" onsubmit="event.preventDefault(); alert('Pesan tiket pertanyaan berhasil diunggah ke log antrean agen customer service!');">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Lengkap</label>
+                        <input class="w-full bg-surface border border-outline-variant rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-primary" type="text" required placeholder="Contoh: Budi Sudarsono"/>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Alamat Email Aktif</label>
+                        <input class="w-full bg-surface border border-outline-variant rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-primary" type="email" required placeholder="budi@email.com"/>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Topik Pertanyaan</label>
+                    <input class="w-full bg-surface border border-outline-variant rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-primary" type="text" required placeholder="Contoh: Estimasi ketersediaan sparepart layar macbook"/>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Isi Pesan Detail</label>
+                    <textarea class="w-full bg-surface border border-outline-variant rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-primary h-28" required placeholder="Deskripsikan pertanyaan Anda secara lengkap..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-primary text-on-primary font-bold py-3 rounded-lg text-xs hover:bg-primary-container transition-colors shadow-sm">Kirim Tiket Konsultasi</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-inverse-surface text-inverse-on-surface mt-stack-lg">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-stack-lg px-margin-desktop py-stack-lg max-w-container-max-width mx-auto text-xs">
+        <div>
+            <div class="text-lg font-bold mb-4">LapFix Diagnostic</div>
+            <p class="opacity-80 max-w-xs">© 2026 LapFix Diagnostic. Semua hak dilindungi undang-undang.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <h4 class="font-bold mb-4 uppercase text-primary-fixed-dim">Tautan</h4>
+                <ul class="space-y-2 opacity-80">
+                    <li><a class="hover:underline" href="/">Home</a></li>
+                    <li><a class="hover:underline" href="/diagnosa">Diagnosa</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4 uppercase text-primary-fixed-dim">Legal</h4>
+                <ul class="space-y-2 opacity-80">
+                    <li><a class="hover:underline" href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex flex-col gap-2">
+            <h4 class="font-bold">Hubungi Kami</h4>
+            <p class="opacity-70 text-[11px]">Respon chat agen berkisar antara 10 - 20 menit pada jam operasional kerja.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

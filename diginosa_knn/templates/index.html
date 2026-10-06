@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Home - LapFix Diagnostic</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary": "#003d9b",
+                "primary-container": "#0052cc",
+                "on-primary": "#ffffff",
+                "secondary": "#505f78",
+                "surface": "#f9f9ff",
+                "surface-container": "#e8edff",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-high": "#e0e8ff",
+                "inverse-surface": "#1d3052",
+                "inverse-on-surface": "#edf0ff",
+                "on-background": "#041b3c",
+                "background": "#f9f9ff",
+                "outline-variant": "#c3c6d6"
+            },
+            "spacing": {
+                "stack-md": "16px",
+                "margin-mobile": "16px",
+                "stack-lg": "32px",
+                "margin-desktop": "32px",
+                "container-max-width": "1280px",
+                "gutter": "24px",
+                "stack-sm": "8px"
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-sans">
+
+<nav class="bg-surface border-b border-outline-variant shadow-sm sticky top-0 z-50">
+    <div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max-width mx-auto">
+        <div class="text-xl font-bold text-primary">LapFix Diagnostic</div>
+        <div class="hidden md:flex gap-gutter items-center text-sm">
+            <a class="text-primary font-bold border-b-2 border-primary pb-1" href="/">Home</a>
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/diagnosa">Diagnosa</a>
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/layanan">Layanan</a>
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/kontak">Kontak</a>
+        </div>
+        <a href="/diagnosa" class="bg-primary text-on-primary px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:bg-primary-container text-center">Mulai Diagnosa</a>
+    </div>
+</nav>
+
+<main class="min-h-[calc(100vh-64px-180px)] max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 bg-surface-container text-primary px-4 py-1.5 rounded-full text-xs font-semibold">
+                <span class="material-symbols-outlined text-sm">bolt</span> Solusi Cepat Berbasis AI Expert System
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-on-background leading-tight">
+                Laptop Rusak? <br><span class="text-primary">Diagnosa Mandiri</span> Secara Presisi Sekarang.
+            </h1>
+            <p class="text-secondary text-lg leading-relaxed">
+                Jangan biarkan produktivitas Anda terganggu. Deteksi kerusakan hardware atau software laptop Anda menggunakan algoritma klasifikasi cerdas kNN dengan tingkat akurasi tinggi.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                <a href="/diagnosa" class="bg-primary text-on-primary px-8 py-3.5 rounded-lg font-semibold text-center hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2">
+                    Mulai Diagnosa Sekarang <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+                <a href="/layanan" class="border border-outline-variant text-secondary px-8 py-3.5 rounded-lg font-semibold text-center hover:bg-surface-container transition-colors">
+                    Lihat Layanan Servis
+                </a>
+            </div>
+        </div>
+        <div class="bg-surface-container border border-outline-variant p-8 rounded-2xl flex flex-col justify-between min-h-[320px] shadow-sm">
+            <div class="flex justify-between items-start">
+                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-2xl">analytics</span>
+                </div>
+                <span class="text-xs font-mono bg-white border border-outline-variant px-2 py-1 rounded">Engine v2.6</span>
+            </div>
+            <div class="space-y-2 mt-8">
+                <h3 class="text-xl font-bold text-primary">Prinsip Analitik Cerdas</h3>
+                <p class="text-sm text-secondary leading-relaxed">
+                    Sistem kami memetakan vektor kedekatan spasial dari setiap indikator intensitas kerusakan yang Anda keluhkan terhadap ribuan klaster data riwayat perbaikan laboratorium teknisi kami.
+                </p>
+            </div>
+            <div class="border-t border-outline-variant/60 pt-4 mt-4 grid grid-cols-3 text-center gap-2">
+                <div>
+                    <div class="text-xl font-bold text-primary">95.4%</div>
+                    <div class="text-[10px] uppercase text-secondary font-medium">Akurasi Uji</div>
+                </div>
+                <div>
+                    <div class="text-xl font-bold text-primary">&lt; 3 Menit</div>
+                    <div class="text-[10px] uppercase text-secondary font-medium">Proses Deteksi</div>
+                </div>
+                <div>
+                    <div class="text-xl font-bold text-primary">5 Kategori</div>
+                    <div class="text-[10px] uppercase text-secondary font-medium">Komponen Utama</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter opacity-90">
+        <div class="flex items-center gap-stack-sm p-4 rounded-lg bg-surface-container border border-outline-variant/40">
+            <span class="material-symbols-outlined text-primary">security</span>
+            <span class="text-sm font-medium">Data Model Enkripsi Aman</span>
+        </div>
+        <div class="flex items-center gap-stack-sm p-4 rounded-lg bg-surface-container border border-outline-variant/40">
+            <span class="material-symbols-outlined text-primary">verified</span>
+            <span class="text-sm font-medium">Rekomendasi Terkalibrasi Standar</span>
+        </div>
+        <div class="flex items-center gap-stack-sm p-4 rounded-lg bg-surface-container border border-outline-variant/40">
+            <span class="material-symbols-outlined text-primary">support_agent</span>
+            <span class="text-sm font-medium">Terhubung Langsung Ke Teknisi</span>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-inverse-surface text-inverse-on-surface mt-stack-lg">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-stack-lg px-margin-desktop py-stack-lg max-w-container-max-width mx-auto">
+        <div>
+            <div class="text-lg font-bold mb-4">LapFix Diagnostic</div>
+            <p class="text-xs opacity-80 max-w-xs">© 2026 LapFix Diagnostic. Solusi Perbaikan Terpercaya. Kami membantu mendiagnosa kerusakan laptop Anda dengan presisi teknis.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4 text-xs">
+            <div>
+                <h4 class="font-bold mb-4 uppercase tracking-wider text-primary-fixed-dim">Perusahaan</h4>
+                <ul class="space-y-2 opacity-80">
+                    <li><a class="hover:underline" href="#">Tentang Kami</a></li>
+                    <li><a class="hover:underline" href="#">Pusat Bantuan</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4 uppercase tracking-wider text-primary-fixed-dim">Legal</h4>
+                <ul class="space-y-2 opacity-80">
+                    <li><a class="hover:underline" href="#">Kebijakan Privasi</a></li>
+                    <li><a class="hover:underline" href="#">Syarat &amp; Ketentuan</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex flex-col gap-4 text-xs">
+            <h4 class="font-bold">Langganan Update</h4>
+            <div class="flex gap-2">
+                <input class="bg-surface-container-high text-on-surface rounded-lg px-4 py-2 flex-grow focus:outline-none focus:ring-1 focus:ring-primary border-none text-black text-sm" placeholder="Email Anda" type="email"/>
+                <button class="bg-primary text-on-primary px-4 py-2 rounded-lg hover:opacity-90 transition-opacity font-medium">Kirim</button>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

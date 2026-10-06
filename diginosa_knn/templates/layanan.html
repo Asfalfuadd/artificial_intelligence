@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Layanan - LapFix Diagnostic</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary": "#003d9b",
+                "primary-container": "#0052cc",
+                "on-primary": "#ffffff",
+                "secondary": "#505f78",
+                "surface": "#f9f9ff",
+                "surface-container": "#e8edff",
+                "surface-container-lowest": "#ffffff",
+                "inverse-surface": "#1d3052",
+                "inverse-on-surface": "#edf0ff",
+                "on-background": "#041b3c",
+                "background": "#f9f9ff",
+                "outline-variant": "#c3c6d6"
+            },
+            "spacing": {
+                "stack-lg": "32px",
+                "margin-desktop": "32px",
+                "margin-mobile": "16px",
+                "container-max-width": "1280px",
+                "gutter": "24px"
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-sans">
+
+<nav class="bg-surface border-b border-outline-variant shadow-sm sticky top-0 z-50">
+    <div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max-width mx-auto">
+        <div class="text-xl font-bold text-primary">LapFix Diagnostic</div>
+        <div class="hidden md:flex gap-gutter items-center text-sm">
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/">Home</a>
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/diagnosa">Diagnosa</a>
+            <a class="text-primary font-bold border-b-2 border-primary pb-1" href="/layanan">Layanan</a>
+            <a class="text-secondary hover:text-primary transition-colors duration-200" href="/kontak">Kontak</a>
+        </div>
+        <a href="/diagnosa" class="bg-primary text-on-primary px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:bg-primary-container">Mulai Diagnosa</a>
+    </div>
+</nav>
+
+<main class="min-h-[calc(100vh-64px-180px)] py-12 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+        <h1 class="text-3xl font-bold mb-3 text-slate-900">Katalog Layanan & Estimasi Tarif</h1>
+        <p class="text-secondary text-sm">Berikut adalah rentang referensi biaya perbaikan teknis standar di workshop pusat LapFix.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between shadow-sm">
+            <div>
+                <div class="flex items-center gap-3 mb-4 text-primary">
+                    <span class="material-symbols-outlined text-3xl">monitor</span>
+                    <h3 class="font-bold text-lg text-slate-900">Perbaikan & Ganti Layar</h3>
+                </div>
+                <p class="text-xs text-secondary leading-relaxed mb-6">
+                    Menangani panel bergaris, pecah hancur, kerlip sirkuit inverter backlight, maupun penggantian total panel IPS original tingkat kecerahan tinggi.
+                </p>
+            </div>
+            <div class="border-t border-outline-variant/60 pt-4">
+                <span class="text-[10px] text-secondary block font-semibold uppercase">Mulai Dari</span>
+                <span class="text-xl font-bold text-primary font-mono">Rp 650.0000+</span>
+            </div>
+        </div>
+
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between shadow-sm">
+            <div>
+                <div class="flex items-center gap-3 mb-4 text-primary">
+                    <span class="material-symbols-outlined text-3xl">battery_charging_full</span>
+                    <h3 class="font-bold text-lg text-slate-900">Penggantian Sel Baterai</h3>
+                </div>
+                <p class="text-xs text-secondary leading-relaxed mb-6">
+                    Penggantian suku cadang modul unit baterai tanam Lithium-Polymer yang kembung atau drop parah, lengkap dengan sertifikat jaminan garansi sirkuit daya.
+                </p>
+            </div>
+            <div class="border-t border-outline-variant/60 pt-4">
+                <span class="text-[10px] text-secondary block font-semibold uppercase">Mulai Dari</span>
+                <span class="text-xl font-bold text-primary font-mono">Rp 450.000+</span>
+            </div>
+        </div>
+
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between shadow-sm">
+            <div>
+                <div class="flex items-center gap-3 mb-4 text-primary">
+                    <span class="material-symbols-outlined text-3xl">memory</span>
+                    <h3 class="font-bold text-lg text-slate-900">Overhaul Motherboard</h3>
+                </div>
+                <p class="text-xs text-secondary leading-relaxed mb-6">
+                    Penelusuran detail korsleting komponen mikro SMD solder, reballing chipset Southbridge, penggantian ic power regulator tegangan utama, hingga penanganan mati total.
+                </p>
+            </div>
+            <div class="border-t border-outline-variant/60 pt-4">
+                <span class="text-[10px] text-secondary block font-semibold uppercase">Mulai Dari</span>
+                <span class="text-xl font-bold text-primary font-mono">Rp 800.000+</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-surface-container border border-outline-variant rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-4 text-left">
+            <span class="material-symbols-outlined text-primary text-4xl">info</span>
+            <div>
+                <h4 class="font-bold text-slate-900 text-sm">Butuh kepastian kalkulasi biaya riil kerusakan?</h4>
+                <p class="text-xs text-secondary">Silakan jalankan sistem deteksi otomatis kami sebelum datang langsung ke konter lab.</p>
+            </div>
+        </div>
+        <a href="/diagnosa" class="bg-primary text-on-primary text-xs font-bold px-6 py-3 rounded-lg hover:bg-primary-container whitespace-nowrap shadow-sm">Coba Fitur Diagnosa AI</a>
+    </div>
+</main>
+
+<footer class="bg-inverse-surface text-inverse-on-surface mt-stack-lg">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-stack-lg px-margin-desktop py-stack-lg max-w-container-max-width mx-auto text-xs">
+        <div>
+            <div class="text-lg font-bold mb-4">LapFix Diagnostic</div>
+            <p class="opacity-80 max-w-xs">© 2026 LapFix Diagnostic. Suku cadang bergaransi resmi.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <h4 class="font-bold mb-4 uppercase text-primary-fixed-dim">Menu</h4>
+                <ul class="space-y-2 opacity-80">
+                    <li><a class="hover:underline" href="/">Home</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4 uppercase text-primary-fixed-dim">Bantuan</h4>
+                <ul class="space-y-2 opacity-80">
+                    <li><a class="hover:underline" href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex flex-col gap-2">
+            <h4 class="font-bold">Ikuti Perkembangan</h4>
+            <div class="flex gap-2">
+                <input class="bg-surface-container-high rounded-lg px-3 py-1.5 flex-grow border-none text-black" placeholder="Email" type="email"/>
+                <button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg font-medium">Kirim</button>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

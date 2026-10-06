@@ -1,0 +1,86 @@
+CREATE DATABASE IF NOT EXISTS db_diagnosa_laptop_ml;
+USE db_diagnosa_laptop_ml;
+
+CREATE TABLE IF NOT EXISTS tbl_dataset_ml (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    G01 INT DEFAULT 0, G02 INT DEFAULT 0, G03 INT DEFAULT 0, G04 INT DEFAULT 0, G05 INT DEFAULT 0,
+    G06 INT DEFAULT 0, G07 INT DEFAULT 0, G08 INT DEFAULT 0, G09 INT DEFAULT 0, G10 INT DEFAULT 0,
+    G11 INT DEFAULT 0, G12 INT DEFAULT 0, G13 INT DEFAULT 0, G14 INT DEFAULT 0, G15 INT DEFAULT 0,
+    G16 INT DEFAULT 0, G17 INT DEFAULT 0, G18 INT DEFAULT 0, G19 INT DEFAULT 0, G20 INT DEFAULT 0,
+    G21 INT DEFAULT 0, G22 INT DEFAULT 0, G23 INT DEFAULT 0, G24 INT DEFAULT 0, G25 INT DEFAULT 0,
+    G26 INT DEFAULT 0, G27 INT DEFAULT 0, G28 INT DEFAULT 0, G29 INT DEFAULT 0, G30 INT DEFAULT 0,
+    G31 INT DEFAULT 0, G32 INT DEFAULT 0, G33 INT DEFAULT 0, G34 INT DEFAULT 0, G35 INT DEFAULT 0,
+    G36 INT DEFAULT 0, G37 INT DEFAULT 0, G38 INT DEFAULT 0, G39 INT DEFAULT 0,
+    label_kerusakan VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS tbl_kerusakan (
+    kode VARCHAR(5) PRIMARY KEY,
+    nama_kerusakan VARCHAR(100),
+    deskripsi TEXT,
+    solusi TEXT
+);
+
+INSERT INTO tbl_kerusakan (kode, nama_kerusakan, deskripsi, solusi) VALUES
+('K01', 'Kerusakan Mainboard', 'Kerusakan pada mainboard/motherboard yang menyebabkan banyak komponen tidak berfungsi.', 'Periksa komponen mainboard|Ganti komponen rusak pada mainboard|Bawa ke teknisi profesional untuk diagnosa lebih lanjut'),
+('K02', 'Kerusakan Processor', 'Kerusakan pada processor yang menyebabkan laptop sering restart, hang, atau tidak booting.', 'Bersihkan heatsink dan kipas processor|Ganti thermal paste processor|Periksa kondisi processor di bengkel profesional'),
+('K03', 'Kerusakan VGA / Chipset', 'Kerusakan pada VGA atau chipset grafis yang menimbulkan masalah tampilan.', 'Periksa kabel display dan konektor|Update/reinstall driver VGA|Ganti komponen VGA atau chipset jika rusak'),
+('K04', 'Kerusakan Harddisk', 'Kerusakan harddisk atau SSD yang menyebabkan data tidak terbaca atau sistem gagal boot.', 'Backup data penting|Jalankan pemeriksaan disk dan repair|Ganti harddisk/SSD jika ditemukan kerusakan permanen'),
+('K05', 'Kerusakan RAM', 'Kerusakan modul RAM yang menyebabkan laptop sering crash atau blue screen.', 'Periksa dan pasang ulang RAM|Tes RAM dengan diagnostik|Ganti modul RAM yang rusak'),
+('K06', 'Kerusakan Keyboard / Touchpad', 'Kerusakan pada keyboard atau touchpad yang mengganggu input pengguna.', 'Periksa koneksi keyboard/touchpad|Update/reinstall driver input device|Ganti keyboard atau touchpad jika perlu'),
+('K07', 'Kerusakan LCD', 'Kerusakan layar LCD yang menyebabkan tampilan gelap, garis, atau hilang sebagian.', 'Periksa kabel flex LCD|Ganti panel LCD jika rusak|Gunakan monitor eksternal untuk mendeteksi sumber masalah'),
+('K08', 'Kerusakan Baterai', 'Kerusakan baterai laptop yang menyebabkan tidak bisa mengisi atau indikator tidak normal.', 'Periksa kondisi fisik baterai|Kalibrasi baterai|Ganti baterai jika tidak dapat mengisi ulang'),
+('K09', 'Kerusakan Charger', 'Masalah pada charger atau port pengisian yang menyebabkan laptop tidak mendapatkan daya.', 'Periksa charger dan kabel|Tes output charger dengan multimeter|Ganti charger bila spesifikasi tidak sesuai'),
+('K10', 'Kerusakan Sistem Operasi', 'Kerusakan sistem operasi Windows yang menyebabkan gagal booting atau update gagal.', 'Jalankan scan antivirus|Perbaiki file sistem dengan SFC|Reinstall Windows jika perlu');
+
+INSERT INTO tbl_dataset_ml (G01,G02,G03,G04,G05,G06,G07,G08,G09,G10,G11,G12,G13,G14,G15,G16,G17,G18,G19,G20,G21,G22,G23,G24,G25,G26,G27,G28,G29,G30,G31,G32,G33,G34,G35,G36,G37,G38,G39, label_kerusakan) VALUES 
+(1,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K01'),
+(1,0,0,1,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K01'),
+(0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K01'),
+(1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K01'),
+(0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K01'), 
+(0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K02'),
+(0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K02'),
+(0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K02'),
+(0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K02'),
+(0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K02'), 
+(0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K03'),
+(0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K03'),
+(0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0, 'K03'),
+(0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0, 'K03'),
+(0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0, 'K03'), 
+(0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K04'),
+(0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K04'),
+(0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K04'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K04'),
+(0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K04'), 
+(0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K05'),
+(0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K05'),
+(0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K05'),
+(0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K05'),
+(0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K05'), 
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K06'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0, 'K06'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0, 'K06'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0, 'K06'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0, 'K06'), 
+(0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0, 'K07'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0, 'K07'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0, 'K07'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0, 'K07'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0, 'K07'), 
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0, 'K08'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,0, 'K08'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0, 'K08'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0, 'K08'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0, 'K08'), 
+(1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0, 'K09'),
+(1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0, 'K09'),
+(0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0, 'K09'),
+(1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K09'),
+(0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 'K09'), 
+(0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1, 'K10'),
+(0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0, 'K10'),
+(0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1, 'K10'),
+(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1, 'K10'),
+(0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0, 'K10');
