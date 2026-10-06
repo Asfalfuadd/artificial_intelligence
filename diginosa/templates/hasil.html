@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}Hasil Diagnosa — DigiNosa{% endblock %}
+
+{% block content %}
+<section class="section hasil-section">
+    <div class="container">
+        <!-- Header -->
+        <div class="hasil-header animate-fade-up">
+            <a href="{{ url_for('halaman_diagnosa') }}" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Kembali ke Diagnosa
+            </a>
+            <h1 class="page-title">Hasil Diagnosa</h1>
+            <p class="page-subtitle">Berdasarkan {{ gejala_terpilih|length }} gejala yang Anda pilih</p>
+        </div>
+
+        <!-- Gejala yang dipilih -->
+        <div class="selected-gejala-card animate-fade-up">
+            <h3 class="selected-gejala-title">
+                <span class="selected-icon">📝</span>
+                Gejala yang Dipilih
+            </h3>
+            <div class="selected-gejala-tags">
+                {% for kode in gejala_terpilih %}
+                <span class="gejala-tag">
+                    <strong>{{ kode }}</strong> — {{ gejala_detail[kode] }}
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if hasil %}
+        <!-- Hasil Diagnosa -->
+        <div class="hasil-list">
+            {% for item in hasil %}
+            <div class="hasil-card animate-fade-up {% if loop.first %}hasil-card-primary{% endif %}" style="--delay: {{ loop.index * 0.1 }}s">
+                {% if loop.first %}
+                <div class="hasil-badge-primary">
+                    <span>🏆</span> Diagnosa Utama
+                </div>
+                {% endif %}
+
+                <div class="hasil-card-header">
+                    <div class="hasil-icon-wrap">
+                        <span class="hasil-icon">{{ item.icon }}</span>
+                    </div>
+                    <div class="hasil-info">
+                        <span class="hasil-kode">{{ item.kode }}</span>
+                        <h2 class="hasil-nama">{{ item.nama }}</h2>
+                    </div>
+                    <div class="hasil-confidence">
+                        <div class="confidence-circle" data-confidence="{{ item.confidence }}">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="confidence-bg" cx="50" cy="50" r="42"/>
+                                <circle class="confidence-fill" cx="50" cy="50" r="42"
+                                    stroke-dasharray="{{ item.confidence * 2.64 }} 264"
+                                    stroke-dashoffset="0"/>
+                            </svg>
+                            <span class="confidence-value">{{ item.confidence }}%</span>
+                        </div>
+                        <span class="confidence-label">Confidence</span>
+                    </div>
+                </div>
+
+                <p class="hasil-deskripsi">{{ item.deskripsi }}</p>
+
+                <!-- Gejala yang cocok -->
+                <div class="hasil-gejala-matched">
+                    <h4>Gejala yang Cocok:</h4>
+                    <div class="matched-tags">
+                        {% for g in item.gejala_cocok %}
+                        <span class="matched-tag">{{ g }} — {{ gejala_all[g] }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Rule Digunakan -->
+                <div class="hasil-reasoning">
+
+                    <h4>
+                        <span>🧠</span>
+                        Reasoning System
+                    </h4>
+
+                    <div class="reasoning-box">
+
+                        <div class="reasoning-item">
+                            <strong>Rule Digunakan:</strong>
+                            <span>Rule {{ item.rule_id }}</span>
+                        </div>
+
+                        <div class="reasoning-item">
+                            <strong>Required Condition:</strong>
+
+                            <div class="reasoning-tags">
+
+                                {% for r in item.required %}
+                                <span class="reasoning-tag">
+                                    {{ r }} — {{ gejala_all[r] }}
+                                </span>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                        <div class="reasoning-item">
+                            <strong>Support Match:</strong>
+
+                            <div class="reasoning-tags">
+
+                                {% if item.support_match %}
+                                    {% for s in item.support_match %}
+                                    <span class="reasoning-tag support">
+                                        {{ s }} — {{ gejala_all[s] }}
+                                    </span>
+                                    {% endfor %}
+                                {% else %}
+                                    <span style="color:#888; font-size:0.85rem; font-style:italic;">
+                                        Tidak ada gejala pendukung yang dipilih
+                                        (confidence tetap 70% dari kondisi wajib)
+                                    </span>
+                                {% endif %}
+
+                            </div>
+                        </div>
+
+                        <div class="reasoning-item">
+                            <strong>Penjelasan Reasoning:</strong>
+
+                            <ul class="reasoning-list">
+
+                                {% for r in item.reasoning %}
+                                <li>{{ r }}</li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Solusi -->
+                <div class="hasil-solusi">
+                    <h4>
+                        <span>🛠️</span> Rekomendasi Solusi:
+                    </h4>
+                    <ul class="solusi-list">
+                        {% if item.solusi %}
+                            {% for s in item.solusi %}
+                            <li class="solusi-item">{{ s }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="solusi-item" style="color:#888; font-style:italic;">
+                                Data solusi tidak tersedia.
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <!-- No Results -->
+        <div class="no-results animate-fade-up">
+            <div class="no-results-icon">🔍</div>
+            <h2>Tidak Ditemukan Kerusakan</h2>
+            <p>Berdasarkan gejala yang Anda pilih, sistem tidak dapat menentukan kerusakan yang spesifik. Coba pilih gejala yang lebih spesifik atau tambahkan gejala lain.</p>
+            <a href="{{ url_for('halaman_diagnosa') }}" class="btn btn-primary">
+                <span>Coba Lagi</span>
+            </a>
+        </div>
+        {% endif %}
+
+        <!-- Reasoning Process -->
+        <div class="selected-gejala-card animate-fade-up">
+
+            <h3 class="selected-gejala-title">
+
+                <span class="selected-icon">⚙️</span>
+
+                Proses Forward Chaining
+
+            </h3>
+
+            <ul class="reasoning-process-list">
+
+                {% for step in reasoning_steps %}
+                <li>{{ step }}</li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <!-- Actions -->
+        <div class="hasil-actions animate-fade-up">
+            <a href="{{ url_for('halaman_diagnosa') }}" class="btn btn-primary btn-lg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="1 4 1 10 7 10"></polyline>
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                </svg>
+                <span>Diagnosa Ulang</span>
+            </a>
+            <a href="{{ url_for('index') }}" class="btn btn-ghost">
+                <span>Kembali ke Beranda</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

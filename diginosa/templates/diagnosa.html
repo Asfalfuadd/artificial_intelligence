@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Diagnosa — DigiNosa{% endblock %}
+
+{% block content %}
+<section class="section diagnosa-section">
+    <div class="container">
+        <!-- Header -->
+        <div class="diagnosa-header animate-fade-up">
+            <a href="{{ url_for('index') }}" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Kembali
+            </a>
+            <h1 class="page-title">Pilih Gejala Kerusakan</h1>
+            <p class="page-subtitle">Centang gejala-gejala yang dialami laptop Anda. Semakin banyak gejala yang dipilih, semakin akurat hasil diagnosa.</p>
+        </div>
+
+        <!-- Error Message -->
+        {% if error %}
+        <div class="alert alert-error animate-fade-up">
+            <span class="alert-icon">⚠️</span>
+            <span>{{ error }}</span>
+        </div>
+        {% endif %}
+
+        <!-- Counter Bar -->
+        <div class="counter-bar animate-fade-up" id="counterBar">
+            <div class="counter-info">
+                <span class="counter-icon">✅</span>
+                <span class="counter-text">Gejala dipilih: <strong id="gejalaCount">0</strong></span>
+            </div>
+            <button type="submit" form="diagnosaForm" class="btn btn-primary btn-submit" id="submitBtn" disabled>
+                <span>Proses Diagnosa</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Form -->
+        <form method="POST" action="{{ url_for('proses_diagnosa') }}" id="diagnosaForm">
+            <div class="kategori-grid">
+                {% for kategori_nama, kode_list in kategori.items() %}
+                <div class="kategori-card animate-fade-up" data-kategori="{{ kategori_nama }}">
+                    <div class="kategori-header" onclick="toggleKategori(this)">
+                        <div class="kategori-title-wrap">
+                            {% if kategori_nama == "Power & Daya" %}
+                                <span class="kategori-icon">🔌</span>
+                            {% elif kategori_nama == "Display & Layar" %}
+                                <span class="kategori-icon">🖥️</span>
+                            {% elif kategori_nama == "Booting & Sistem" %}
+                                <span class="kategori-icon">⚙️</span>
+                            {% elif kategori_nama == "Storage & OS" %}
+                                <span class="kategori-icon">💾</span>
+                            {% elif kategori_nama == "Input Device" %}
+                                <span class="kategori-icon">⌨️</span>
+                            {% elif kategori_nama == "Baterai" %}
+                                <span class="kategori-icon">🔋</span>
+                            {% endif %}
+                            <h3 class="kategori-title">{{ kategori_nama }}</h3>
+                            <span class="kategori-count">{{ kode_list|length }} gejala</span>
+                        </div>
+                        <span class="kategori-toggle">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="kategori-body open">
+                        {% for kode in kode_list %}
+                        <label class="gejala-item" for="gejala_{{ kode }}">
+                            <input type="checkbox" name="gejala" value="{{ kode }}" id="gejala_{{ kode }}" class="gejala-checkbox">
+                            <span class="gejala-check">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="gejala-kode">{{ kode }}</span>
+                            <span class="gejala-nama">{{ gejala[kode] }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Submit Button (bottom) -->
+            <div class="form-footer animate-fade-up">
+                <button type="reset" class="btn btn-ghost" id="resetBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="1 4 1 10 7 10"></polyline>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                    </svg>
+                    <span>Reset</span>
+                </button>
+                <button type="submit" class="btn btn-primary btn-lg" id="submitBtnBottom" disabled>
+                    <span>Proses Diagnosa</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

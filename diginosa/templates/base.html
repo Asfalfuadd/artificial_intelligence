@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DigiNosa — Sistem Pakar Diagnosa Kerusakan Laptop berbasis Rule-Based Forward Chaining. Identifikasi masalah laptop Anda dengan cepat dan akurat.">
+    <meta name="keywords" content="diagnosa laptop, kerusakan laptop, sistem pakar, rule based, forward chaining">
+    <title>{% block title %}DigiNosa — Diagnosa Kerusakan Laptop{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-content">
+            <a href="{{ url_for('index') }}" class="navbar-brand">
+                <span class="brand-icon">💻</span>
+                <span class="brand-text">Digi<span class="brand-highlight">Nosa</span></span>
+            </a>
+            <div class="navbar-links">
+                <a href="{{ url_for('index') }}" class="nav-link">Beranda</a>
+                <a href="{{ url_for('halaman_diagnosa') }}" class="nav-link btn-nav-cta">Mulai Diagnosa</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="{{ url_for('index') }}" class="nav-link">Beranda</a>
+            <a href="{{ url_for('halaman_diagnosa') }}" class="nav-link btn-nav-cta">Mulai Diagnosa</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">💻</span>
+                    <span class="brand-text">Digi<span class="brand-highlight">Nosa</span></span>
+                    <p class="footer-desc">Sistem Pakar Diagnosa Kerusakan Laptop berbasis Rule-Based Forward Chaining.</p>
+                </div>
+                <div class="footer-info">
+                    <p class="footer-tech">Metode: Forward Chaining · Rule-Based Expert System</p>
+                    <p class="footer-copy">&copy; 2026 DigiNosa. Dibuat dengan Python Flask.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
